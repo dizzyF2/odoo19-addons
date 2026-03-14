@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">appointment.form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="date" />
+                        <field name="start_time" />
+                        <field name="end_time" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_appointment_list" model="ir.ui.view">
+        <field name="name">appointment.list</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <list string="Appointment">
+                <field name="name" />
+                <field name="date" />
+                <field name="start_time" />
+                <field name="end_time" />
+            </list>
+        </field>
+    </record>
+</odoo>

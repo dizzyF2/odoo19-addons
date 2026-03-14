@@ -1,0 +1,18 @@
+# Ignore everything
+*
+
+# But track your custom modules
+!custom_addons/
+!custom_addons/**
+
+# Track these essentials
+!.gitignore
+!README.md
+
+# Ignore Odoo core and other large folders
+odoo/
+odoo-bin
+addons/
+*.pyc
+__pycache__/
+odoo.conf

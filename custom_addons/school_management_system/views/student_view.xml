@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View (tree view in older versions) -->
+    <record id="student_list_view" model="ir.ui.view">
+        <field name="name">Student list</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="date_of_birth"/>
+                <field name="address"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View: when click new to add  new student with his info.  -->
+    <record id="student_form_view" model="ir.ui.view">
+        <field name="name">school_student.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Basic Information">
+                        <field name="name"/>
+                        <field name="date_of_birth"/>
+                    </group>    
+                    <group string="Contact Information">
+                        <field name="phone_number"/>
+                        <field name="address"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View: search bar inside student action view -->
+    <record id="student_search_view" model="ir.ui.view">
+        <field name="name">school_student.search</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="phone_number" />
+
+                <filter name="name_equal_faris" string="whoever Name is Faris" domain="[('name', '=', 'faris')]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="student_action" model="ir.actions.act_window">
+        <field name="name">Student Action</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="student_action_menu"
+        name="Students Management"
+        action="student_action"
+        parent="school_student_sub_menu"
+    />
+</odoo>
