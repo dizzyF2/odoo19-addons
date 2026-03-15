@@ -8,8 +8,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
+                <field name="age"/>
                 <field name="phone_number"/>
-                <field name="date_of_birth"/>
                 <field name="address"/>
             </list>
         </field>
@@ -24,7 +24,7 @@
                 <sheet>
                     <group string="Basic Information">
                         <field name="name"/>
-                        <field name="date_of_birth"/>
+                        <field name="age" />
                     </group>    
                     <group string="Contact Information">
                         <field name="phone_number"/>
