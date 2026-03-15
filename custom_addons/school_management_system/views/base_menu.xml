@@ -20,12 +20,6 @@
         sequence="2"
     />
 
-    <menuitem
-        id="school_enrollment_sub_menu"
-        name="Enrollments"
-        parent="school_root_menu"
-        sequence="3"
-    />
     
 
 </odoo>

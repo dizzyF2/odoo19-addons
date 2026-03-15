@@ -47,5 +47,6 @@
         name="Course Management"
         action="course_action"
         parent="school_course_sub_menu"
+        sequence="1"
         />
 </odoo>
