@@ -8,8 +8,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="phone_number"/>
                 <field name="age"/>
+                <field name="phone_number"/>
                 <field name="address"/>
             </list>
         </field>
@@ -26,10 +26,14 @@
                         <field name="name"/>
                         <field name="date_of_birth"/>
                         <field name="age" />
+                        <field name="gender" />
                     </group>    
                     <group string="Contact Information">
                         <field name="phone_number"/>
                         <field name="address"/>
+                    </group>
+                    <group>
+                        <field name="image" widget="image" class="oe_avatar" />
                     </group>
                 </sheet>
             </form>

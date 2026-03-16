@@ -9,8 +9,10 @@ class SchoolStudent(models.Model):
     name = fields.Char(string='Student Name', required=True)
     date_of_birth = fields.Date(string="Date of birth")
     age = fields.Integer(string='Age', compute="_compute_age_", store=True)
+    gender = fields.Selection([("male","Male"),("female","Female")])
     phone_number = fields.Integer(string='Phone Number', required=True)
     address = fields.Text(string='Address')
+    image = fields.Binary(attachment=True)
     active = fields.Boolean(default=True)
 
     enrollment_ids = fields.One2many("school.enrollment", "student_id", string="Enrollment ID", required=True)
