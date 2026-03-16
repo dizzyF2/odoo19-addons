@@ -1,12 +1,14 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from datetime import date
 
 class SchoolStudent(models.Model):
     _name = 'school.student'
     _description = 'Student information'
 
     name = fields.Char(string='Student Name', required=True)
-    age = fields.Integer(string='Age')
+    date_of_birth = fields.Date(string="Date of birth")
+    age = fields.Integer(string='Age', compute="_compute_age_", store=True)
     phone_number = fields.Integer(string='Phone Number', required=True)
     address = fields.Text(string='Address')
     active = fields.Boolean(default=True)
@@ -36,3 +38,12 @@ class SchoolStudent(models.Model):
     #     # (choose name, operation sql, display message)
     #     ('unique_name','unique(name)','Name is exists'),
     # ]
+
+    @api.depends("date_of_birth")
+    def _compute_age_(self):
+        for rec in self:
+            today = date.today()
+            if rec.date_of_birth:
+                rec.age = today.year - rec.date_of_birth.year
+            else:
+                rec.age = 0
