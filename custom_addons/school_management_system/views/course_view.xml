@@ -26,6 +26,16 @@
                     <group string="Course Status">
                         <field name="active" />
                     </group>
+                    <notebook>
+                        <page name="enrollments" string="Enrolled Students">
+                            <field name="enrollment_ids">
+                                <list>
+                                    <field name="student_id" />
+                                    <field name="enrollment_date" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

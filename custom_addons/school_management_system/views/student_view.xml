@@ -35,6 +35,16 @@
                     <group>
                         <field name="image" widget="image" class="oe_avatar" />
                     </group>
+                    <notebook>
+                        <page name="enrollments" string="Enrolled Courses">
+                            <field name="enrollment_ids">
+                                <list editable="top">
+                                    <field name="course_id" />
+                                    <field name="enrollment_date" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
