@@ -18,20 +18,27 @@
         <field name="model">school.course</field>
         <field name="arch" type="xml">
             <form>
+                <field name="state" widget="statusbar" class="d-flex" />
                 <sheet>
+                    <header>
+                        <button type="object" name="action_schechuled" string="Schedule" class="btn btn-primary" invisible="state !='draft' " />
+                        <button type="object" name="action_start" string="Start" class="btn btn-secondary" invisible="state !='scheduled' " />
+                        <button type="object" name="action_done" string="Completed" class="btn btn-success" invisible="state != 'start' " />
+                        <button type="object" name="action_cancel" string="Cancel" class="btn btn-danger" invisible="state == 'done' or state == 'cancelled' " />
+                    </header>
                     <group string="Course Information">
-                        <field name="name" />
-                        <field name="description" />
+                        <field name="name" readonly="state == 'done'"/>
+                        <field name="description" readonly="state == 'done'"/>
                     </group>
                     <group string="Course Status">
-                        <field name="active" />
+                        <field name="active" readonly="state == 'done'" />
                     </group>
                     <notebook>
                         <page name="enrollments" string="Enrolled Students">
-                            <field name="enrollment_ids">
+                            <field name="enrollment_ids" readonly="state == 'done'">
                                 <list>
-                                    <field name="student_id" />
-                                    <field name="enrollment_date" />
+                                    <field name="student_id" readonly="parent.state == 'done'"/>
+                                    <field name="enrollment_date" readonly="parent.state == 'done'"/>
                                 </list>
                             </field>
                         </page>

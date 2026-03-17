@@ -12,6 +12,6 @@ class SchoolCourse(models.Model):
     active = fields.Boolean(default=True)
 
     student_id = fields.Many2one("school.student", string="Student", required=True)
-    course_id = fields.Many2one("school.course", string="Course", required=True)
+    course_id = fields.Many2one("school.course", string="Course", required=True, ondelete='cascade')
 
     phone_number = fields.Integer(string="Student Phone", related='student_id.phone_number')

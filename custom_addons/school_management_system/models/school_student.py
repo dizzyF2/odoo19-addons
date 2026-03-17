@@ -15,7 +15,7 @@ class SchoolStudent(models.Model):
     image = fields.Binary(attachment=True)
     active = fields.Boolean(default=True)
 
-    enrollment_ids = fields.One2many("school.enrollment", "student_id", string="Enrollment ID", required=True)
+    enrollment_ids = fields.One2many("school.enrollment", "student_id", string="Enrollment", required=True)
     
 
     # this one will warn you because you enter invalid data and will not store it in the database
