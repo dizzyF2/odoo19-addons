@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="category_school" model="ir.module.category">
+        <field name="name">School Management</field>
+    </record>
+
+    <!-- 2. ADD THIS: The Privilege (The actual dropdown/selection in User form) -->
+    <record id="privilege_school_management" model="res.groups.privilege">
+        <field name="name">Access Level</field>
+        <field name="category_id" ref="category_school" />
+    </record>
+
+    <record id="group_manager" model="res.groups">
+        <field name="name">School Manager</field>
+        <field name="privilege_id" ref="privilege_school_management" />
+    </record>
+
+    <record id="group_teacher" model="res.groups">
+        <field name="name">School Teacher</field>
+        <field name="privilege_id" ref="privilege_school_management" />
+    </record>
+
+    <record id="group_parent" model="res.groups">
+        <field name="name">School Parent</field>
+        <field name="privilege_id" ref="privilege_school_management" />
+    </record>
+
+</odoo>

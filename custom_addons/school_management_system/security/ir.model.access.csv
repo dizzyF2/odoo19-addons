@@ -1,7 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_school_student,school student access,model_school_student,,1,1,1,1
+access_school_student_by_manager,school_student_access_by_manger,model_school_student,group_manager,1,1,1,1
+access_school_course_by_manger,school_course_access_by_manger,model_school_course,group_manager,1,1,1,1
+access_school_enrollment_by_manger,school_enrollment_access_by_manger,model_school_enrollment,group_manager,1,1,1,1
 
-access_school_course,school course access,model_school_course,,1,1,1,1
-
-access_school_enrollment,school enrollment access,model_school_enrollment,,1,1,1,1
+access_school_student_by_teacher,school_student_access_by_teacher,model_school_student,group_teacher,1,1,0,0
+access_school_enrollment_by_teacher,school_enrollment_access_by_teacher,model_school_enrollment,group_teacher,1,0,0,0
