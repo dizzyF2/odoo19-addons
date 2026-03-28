@@ -16,6 +16,8 @@ class SchoolStudent(models.Model):
     active = fields.Boolean(default=True)
 
     enrollment_ids = fields.One2many("school.enrollment", "student_id", string="Enrollment", required=True)
+
+    teacher_id = fields.Many2one('res.users')
     
 
     # this one will warn you because you enter invalid data and will not store it in the database

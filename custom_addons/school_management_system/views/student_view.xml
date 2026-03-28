@@ -32,6 +32,9 @@
                         <field name="phone_number"/>
                         <field name="address"/>
                     </group>
+                    <group string="Belongs to" groups="school_management_system.group_manager">
+                        <field name="teacher_id" />
+                    </group>
                     <group>
                         <field name="image" widget="image" class="oe_avatar" />
                     </group>

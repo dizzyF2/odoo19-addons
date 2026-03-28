@@ -10,6 +10,7 @@
     "website": 'https://www.yourcompany.com',
     "depends": ["base"],
     "data": [
+        "security/security.xml",
         "security/groups.xml",
         "security/ir.model.access.csv",
         "views/base_menu.xml",
