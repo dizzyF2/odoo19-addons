@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="todo_task_view_list" model="ir.ui.view">
+        <field name="name">todo.task.view.list</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <list string="Tasks">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="assign_to"/>
+                <field name="due_date"/>
+                <field name="status" />
+            </list>
+        </field>
+    </record>
+
+    <record id="todo_task_view_form" model="ir.ui.view">
+        <field name="name">todo.task.view.form</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="assign_to"/>
+                        <field name="due_date"/>
+                    </group>
+                    <group>
+                        <field name="status" />
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="todo_task_view_search" model="ir.ui.view">
+        <field name="name">todo.task.view.search</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="assign_to"/>
+
+                <filter name="group_by_assign_to" string="Assign to" context="{'group_by': 'assign_to'}" />
+                <filter name="group_by_state" string="Status" context="{'group_by': 'status'}" />
+                <filter name="group_by_due_date" string="Due Date" context="{'group_by': 'due_date'}" />
+
+                <filter name="status_new" string="status: New" domain="[('status', '=', 'new')]"/>
+                <filter name="status_in_progress" string="status: in Progress" domain="[('status', '=', 'in_progress')]" />
+                <filter name="status_completed" string="status: Completed" domain="[('status', '=', 'completed')]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="tasks_action" model="ir.actions.act_window">
+        <field name="name">Todo Tasks</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="ie">
+                Add your first task
+            </p>
+        </field>
+    </record>
+
+</odoo>
