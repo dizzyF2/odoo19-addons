@@ -21,15 +21,35 @@
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                        <button 
+                            string="In Progress" 
+                            name="action_in_progress" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="status != 'new'"
+                        />
+                        <button 
+                            string="Completed" 
+                            name="action_completed" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="status != 'in_progress'"
+                        />
+                        <button 
+                            string="Reset to New" 
+                            name="action_new" 
+                            type="object"
+                            invisible="status == 'new'"
+                        />
+                        <field name="status" widget="statusbar"/>
+                    </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="description"/>
                         <field name="assign_to"/>
                         <field name="due_date"/>
-                    </group>
-                    <group>
-                        <field name="status" />
                     </group>
                 </sheet>
                 <chatter />
