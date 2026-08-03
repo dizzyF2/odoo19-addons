@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from odoo import api,fields,models
+from odoo import fields,models
 
 class TodoManagement(models.Model):
     _name = 'todo.task'
@@ -14,8 +13,17 @@ class TodoManagement(models.Model):
         ("new","New"),
         ("in_progress","In Progress"),
         ("completed","Completed")
-    ])
+    ], default="new")
 
 
+    def action_new(self):
+        for rec in self:
+            rec.status = "new"
 
-    
+    def action_in_progress(self):
+            for rec in self:
+                rec.status = "in_progress"
+
+    def action_completed(self):
+            for rec in self:
+                rec.status = "completed"
