@@ -50,6 +50,7 @@
                         <field name="description"/>
                         <field name="assign_to"/>
                         <field name="due_date"/>
+                        <field name="active" invisible="True" />
                     </group>
                 </sheet>
                 <chatter />

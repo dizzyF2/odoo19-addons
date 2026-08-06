@@ -16,6 +16,7 @@ class TodoManagement(models.Model):
         ("completed","Completed")
     ], default="new")
     estimated_time = fields.Float(string="Estimated Time (hours)")
+    active = fields.Boolean(default=True)
 
     timesheet_line_ids = fields.One2many('todo.task.timesheet', 'task_id', string='Timesheets')
 
