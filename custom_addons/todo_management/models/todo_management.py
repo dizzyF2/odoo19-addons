@@ -1,4 +1,5 @@
-from odoo import fields,models
+from odoo import fields,models, api
+from odoo.exceptions import ValidationError
 
 class TodoManagement(models.Model):
     _name = 'todo.task'
@@ -14,6 +15,9 @@ class TodoManagement(models.Model):
         ("in_progress","In Progress"),
         ("completed","Completed")
     ], default="new")
+    estimated_time = fields.Float(string="Estimated Time (hours)")
+
+    timesheet_line_ids = fields.One2many('todo.task.timesheet', 'task_id', string='Timesheets')
 
 
     def action_new(self):
@@ -27,3 +31,12 @@ class TodoManagement(models.Model):
     def action_completed(self):
             for rec in self:
                 rec.status = "completed"
+
+    @api.constrains('timesheet_line_ids', 'estimated_time')
+    def _check_total_time(self):
+        for rec in self:
+            total = sum(rec.timesheet_line_ids.mapped("hours"))
+            if total > rec.estimated_time:
+                raise ValidationError(
+                    "Total timesheet hours cannot exceed the estimated time."
+                    )
