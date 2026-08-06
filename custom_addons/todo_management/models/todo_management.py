@@ -13,7 +13,8 @@ class TodoManagement(models.Model):
     status = fields.Selection([
         ("new","New"),
         ("in_progress","In Progress"),
-        ("completed","Completed")
+        ("completed","Completed"),
+        ("closed","Closed")
     ], default="new")
     estimated_time = fields.Float(string="Estimated Time (hours)")
     active = fields.Boolean(default=True)
@@ -32,6 +33,10 @@ class TodoManagement(models.Model):
     def action_completed(self):
             for rec in self:
                 rec.status = "completed"
+
+    def action_closed(self):
+            for rec in self:
+                rec.status = "close"
 
     @api.constrains('timesheet_line_ids', 'estimated_time')
     def _check_total_time(self):
