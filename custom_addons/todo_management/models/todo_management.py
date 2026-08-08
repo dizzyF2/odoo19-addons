@@ -10,6 +10,11 @@ class TodoManagement(models.Model):
     description = fields.Text(string="Description")
     assign_to = fields.Many2one(comodel_name="res.partner", string="Assign To", tracking=True) #relation field with res.partner
     due_date = fields.Datetime(string="Due Date")
+    is_overdue = fields.Boolean(
+        string="Overdue",
+        compute="_compute_is_overdue",
+        store=True,
+    )
     status = fields.Selection([
         ("new","New"),
         ("in_progress","In Progress"),
@@ -20,6 +25,7 @@ class TodoManagement(models.Model):
     active = fields.Boolean(default=True)
 
     timesheet_line_ids = fields.One2many('todo.task.timesheet', 'task_id', string='Timesheets')
+
 
 
     def action_new(self):
@@ -36,7 +42,21 @@ class TodoManagement(models.Model):
 
     def action_closed(self):
             for rec in self:
-                rec.status = "close"
+                rec.status = "closed"
+
+    def _cron_check_overdue(self):
+        tasks = self.search([])
+        tasks._compute_is_overdue()
+
+    @api.depends("due_date", "status")
+    def _compute_is_overdue(self):
+        now = fields.Datetime.now()
+        for rec in self:
+            rec.is_overdue = (
+                bool(rec.due_date)
+                and rec.due_date < now
+                and rec.status not in ("completed", "closed")
+            )
 
     @api.constrains('timesheet_line_ids', 'estimated_time')
     def _check_total_time(self):

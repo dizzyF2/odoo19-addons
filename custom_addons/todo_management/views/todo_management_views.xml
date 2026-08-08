@@ -6,12 +6,13 @@
         <field name="name">todo.task.view.list</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
-            <list string="Tasks">
+            <list string="Tasks" decoration-danger="is_overdue">
                 <field name="name"/>
                 <field name="description"/>
                 <field name="assign_to"/>
                 <field name="due_date"/>
                 <field name="status" />
+                <field name="is_overdue" invisible="1" />
             </list>
         </field>
     </record>
@@ -96,6 +97,16 @@
         <field name="code">
             action = records.action_closed()
         </field>
+    </record>
+
+    <record id="check_due_date_cron" model="ir.cron">
+        <field name="name">todo: checking due date</field>
+        <field name="model_id" ref="model_todo_task" />
+        <field name="state">code</field>
+        <field name="code">model._cron_check_overdue()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
     </record>
 
 </odoo>
