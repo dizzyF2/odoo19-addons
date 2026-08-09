@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="todo_task_report" model="ir.actions.report">
+        <field name="name">Todo Task Report</field>
+        <field name="model">todo.task</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">todo_management.todo_task_report_template</field>
+        <field name="report_file">todo_management.todo_task_report_template</field>
+        <field name="binding_model_id" ref="model_todo_task" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="todo_task_report_template" name="Todo Report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <section >
+                            <div>
+                                <strong>Task:</strong>
+                                <span t-field="o.name"/>
+                            </div>
+                            <div>
+                                <strong>Due Date:</strong>
+                                <span t-field="o.due_date"/>
+                            </div>
+                            <div>
+                                <strong>Estimated Time:</strong>
+                                <span t-field="o.estimated_time"/>
+                            </div>
+                        </section>
+                        <section >
+                            <strong>Description:</strong>
+                            <p t-field="o.description"/>
+                        </section>
+                        <section class="timesheet">
+                            <h4>Timesheet</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-foreach="o.timesheet_line_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <!-- Number -->
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.date"/>
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.description"/>
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.hours"/>
+                                                H
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <tr>
+                                        <td colspan="3">
+                                            <strong>Total Time</strong>
+                                        </td>
+
+                                        <td>
+                                            <strong>
+                                                <span t-esc="sum(o.timesheet_line_ids.mapped('hours'))"/>
+                                                H
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

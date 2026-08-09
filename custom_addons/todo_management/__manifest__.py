@@ -13,6 +13,7 @@
     "security/ir.model.access.csv",
     "views/base_menu.xml",
     "views/todo_management_views.xml",
+    "reports/todo_task_report.xml",
     ],
     "assets": {},
     "license": "LGPL-3",
