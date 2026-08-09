@@ -7,7 +7,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">todo_management.todo_task_report_template</field>
         <field name="report_file">todo_management.todo_task_report_template</field>
-        <field name="binding_model_id" ref="model_todo_task" />
+        <field name="binding_model_id" ref="model_todo_task"/>
         <field name="binding_type">report</field>
     </record>
 
@@ -15,78 +15,116 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
+
                     <div class="page">
-                        <section >
-                            <div>
-                                <strong>Task:</strong>
-                                <span t-field="o.name"/>
-                            </div>
-                            <div>
-                                <strong>Due Date:</strong>
-                                <span t-field="o.due_date"/>
-                            </div>
-                            <div>
-                                <strong>Estimated Time:</strong>
-                                <span t-field="o.estimated_time"/>
-                            </div>
-                        </section>
-                        <section >
-                            <strong>Description:</strong>
-                            <p t-field="o.description"/>
-                        </section>
-                        <section class="timesheet">
-                            <h4>Timesheet</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Description</th>
-                                        <th>Time</th>
-                                    </tr>
-                                </thead>
+                        <div class="container" style="max-width: 900px; margin: 0 auto;">
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h3 class="mb-0">Task Details</h3>
+                                </div>
 
-                                <tbody>
-                                    <t t-foreach="o.timesheet_line_ids" t-as="line">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-6 mb-3">
+                                            <strong class="text-muted">Task</strong>
+                                            <div class="mt-1">
+                                                <span t-field="o.name"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6 mb-3">
+                                            <strong class="text-muted">Due Date</strong>
+                                            <div class="mt-1">
+                                                <span t-field="o.due_date"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <strong class="text-muted">Estimated Time</strong>
+                                            <div class="mt-1">
+                                                <span t-field="o.estimated_time"/>
+                                                <span>H</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h4 class="mb-0">Description</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="mb-0" t-field="o.description"/>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                <h4 class="mb-0">Timesheet</h4>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <table class="table table-bordered table-striped mb-0">
+                                    <thead class="table-light">
                                         <tr>
-                                            <td>
-                                                <!-- Number -->
+                                            <th class="text-center" style="width: 8%;">#</th>
+                                            <th style="width: 18%;">Date</th>
+                                            <th>Description</th>
+                                            <th class="text-center" style="width: 15%;">Time</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <t t-foreach="o.timesheet_line_ids" t-as="line">
+
+                                            <tr>
+                                                <td class="text-center">
+                                                    <span t-esc="line_index + 1"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-field="line.date"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-field="line.description"/>
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <span t-field="line.hours"/>
+                                                    <span>H</span>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                        <tr class="fw-bold">
+                                            <td colspan="3" class="text-center">
+                                                Total Time
                                             </td>
 
-                                            <td>
-                                                <span t-field="line.date"/>
-                                            </td>
-
-                                            <td>
-                                                <span t-field="line.description"/>
-                                            </td>
-
-                                            <td>
-                                                <span t-field="line.hours"/>
+                                            <td class="text-center">
+                                                <span t-esc="sum(o.timesheet_line_ids.mapped('hours'))"/>
                                                 H
                                             </td>
                                         </tr>
-                                    </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-                                    <tr>
-                                        <td colspan="3">
-                                            <strong>Total Time</strong>
-                                        </td>
-
-                                        <td>
-                                            <strong>
-                                                <span t-esc="sum(o.timesheet_line_ids.mapped('hours'))"/>
-                                                H
-                                            </strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </section>
                     </div>
+
                 </t>
             </t>
         </t>
     </template>
+
+
 
 </odoo>
